@@ -1,4 +1,6 @@
-First NFT application using IPFS storage
+First NFT application using IPFS storage 
+
+> "IPFS and NFT-Enabled Data Sharing for IoT"
 
 * The application uses react js on the front end to upload images to IPFS storage.
 * Users connect his wallet to the GUI to start minting NFTs (ie. Execute a mint function on the smart contract)
