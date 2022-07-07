@@ -20,3 +20,19 @@ Steps:
 *1. Build/install a react js frontend server to host front end application using 'npx create-react-app web3demo'
 *2. Install packages and dependencies (listed above)
 *3. Create GUI dashboard (app.js) using html/css
+
+
+
+06/07/2022
+* Updated the front end to include several new buttons, basic layout
+* Details form, buttons and labels
+
+
+07/07/2022
+* Added Sell/Transfer button
+* Spacing between components
+* Enable connect wallet button to allow user to interact with the blockchain (Wallet Required (dependencie))
+    - import web3 from web3
+    - connectwallet() function defined outside of main App() function because it is called when user clicks button (async)
+    - Linked to Connect Wallet button (On Click)
+    - Useful documentation "https://docs.ethers.io" for viewing available functions calls the for Smart Contracts
