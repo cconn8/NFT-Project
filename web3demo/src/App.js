@@ -37,7 +37,7 @@ function App() {
             <h4 style={{color: "#FFFFFF"}}>IoT-NFT App</h4>
 
             <section>
-              <Button style={{marginBottom:"5px", marginRight:"5px"}}>Connect Device</Button><Button style={{marginBottom:"5px", marginLeft:"5px"}}>Connect Wallet</Button>
+              <Button style={{marginBottom:"5px", marginRight:"5px"}}>Connect Device</Button><Button onClick={connectWallet} style={{marginBottom:"5px", marginLeft:"5px"}}>Connect Wallet</Button>
             </section>
 
             <form>

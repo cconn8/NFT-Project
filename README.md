@@ -24,7 +24,6 @@ Steps:
 3. Create GUI dashboard (app.js) using html/css
 
 
-
 06/07/2022
 * Updated the front end to include several new buttons, basic layout
 * Details form, buttons and labels
@@ -38,3 +37,18 @@ Steps:
     - connectwallet() function defined outside of main App() function because it is called when user clicks button (async)
     - Linked to Connect Wallet button (OnClick)
     - Useful documentation "https://docs.ethers.io" for viewing available functions calls the for Smart Contracts
+
+08/07/2022
+* Created Smart Contract (ERC21) - setting the contract name to EE5003v1
+* Solidity used (https://docs.openzeppelin.com/contracts/4.x/wizard) used for creating templates
+    - SC composed of interfaces, attributes and functions 
+    - Interfaces: Ownable, Enumerable, Receiver, Transferable etc..
+    - Attributes: 
+        NFT Collection name (EE5003v1), 
+        NFT token, 
+        NFT Base URI (Path to where NFT metadata file is located (IPFS - points to actual data), 
+        NFT Base URI extension (.json)
+        NFT Mint amount, cost etc..
+        NFT Max Supply (sets the limit on the max supply of NFT - can't be changed later)
+        NFT Max Mint Amount (sets the number of mints allowed (ie. purchases of the data))
+    - Functions: Mint, Withdraw, Transfer etc..
