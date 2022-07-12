@@ -1243,19 +1243,20 @@ abstract contract Ownable is Context {
 
 pragma solidity ^0.8.0;
 
-contract EE5003v1 is ERC721Enumerable, Ownable {
+contract EE5003v1 is ERC721Enumerable, Ownable {   //contract interfaces defined
     using Strings for uint256;
-    string public baseURI;
+    string public baseURI;                     //IPFS location for metadata file (this specifies path to data)
     string public baseExtension = ".json";
-        uint256 public cost = 0.05 ether;   //needs to be updated
-    uint256 public maxSupply = 1000;
-    uint256 public maxMintAmount = 5;
+        uint256 public cost = 0.05 ether;   //setting arbitrary cost for NFT (data)
+    uint256 public maxSupply = 1000;       //maximum amount of copies of the NFT (verifiable data representations)
+    uint256 public maxMintAmount = 5;     //maximum a user can mint (5)
     bool public paused = false;
 
-    constructor() ERC721("Net2Dev NFT Collection", "N2D") {}
+    constructor() ERC721("IoT Data enabled NFT Collection", "IDC") {} //construtor takes NFT title, Token symbol (IDC: IoT Data Collection)
         // internal
         function _baseURI() internal view virtual override returns (string memory) {
         return "ipfs://EE5MmqVp5MmqVp7ZRMBBizicVh9ficVh9fjUofWicVh9f/";   //needs to be updated. This stores the metafile location in IPFS
+        //return "ipfs://EE5MmqVp5MmqVp7ZRMBBizicVh9ficVh9fjUofWicVh9f/{token ID}.json"; happens after an NFT is minted, appends token id and extension
     }
         // public
 

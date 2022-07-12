@@ -24,12 +24,12 @@ Steps:
 3. Create GUI dashboard (app.js) using html/css
 
 
-06/07/2022
+06/07/2022 - basic GUI
 * Updated the front end to include several new buttons, basic layout
 * Details form, buttons and labels
 
 
-07/07/2022
+07/07/2022 - basic GUI
 * Added Sell/Transfer button
 * Spacing between components
 * Enable connect wallet button to allow user to interact with the blockchain (Wallet Required (dependencie))
@@ -38,8 +38,8 @@ Steps:
     - Linked to Connect Wallet button (OnClick)
     - Useful documentation "https://docs.ethers.io" for viewing available functions calls the for Smart Contracts
 
-08/07/2022
-* Created Smart Contract (ERC21) - setting the contract name to EE5003v1
+08/07/2022 - smart contract
+* Created Smart Contract (ERC21 - layer 2 token) - setting the contract name to EE5003v1
 * Solidity used (https://docs.openzeppelin.com/contracts/4.x/wizard) used for creating templates
     - SC composed of interfaces, attributes and functions 
     - Interfaces: Ownable, Enumerable, Receiver, Transferable etc..
@@ -52,3 +52,18 @@ Steps:
         NFT Max Supply (sets the limit on the max supply of NFT - can't be changed later)
         NFT Max Mint Amount (sets the number of mints allowed (ie. purchases of the data))
     - Functions: Mint, Withdraw, Transfer etc..
+    - Once configuration changes have been made to the smart contract
+        - ctrl-all the file and go to remix.ethereum.org (public IDE) to interact directly with the smart contract (ie. Mint the contract on the blockchain - testnet)
+
+
+11/07/2022 - nft preperation/upload to IPFS
+* Create test IPFS store using a simple jpeg photo (later IoT data will be stored)
+* NOTE - IPFS pinning. To ensure always available data, the data needs to be pinned using a service (pinata) or using local IPFS node to store (pin) the file
+* Created two folders locally on my machine under storage folders in NFT project directory (1. art (nft image) folder, 2. metadata folder)
+    - stock images used from [https://www.istockphoto.com/vector/glowing-neon-line-electric-car-and-electrical-cable-plug-charging-icon-isolated-on-gm1371031659-440451276] - not licensed
+* Created json metadata template containing fields: Name, description, image, edition, image attributes
+
+    - //note: may need to include another address for the data and have an image to represent the NFT
+    - //attributes are image attributes, what makes the images unique (colours, facial expressions, changes etc.)
+
+* Installed IPFS

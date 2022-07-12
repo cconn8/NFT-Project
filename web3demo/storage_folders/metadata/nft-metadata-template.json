@@ -1,0 +1,21 @@
+{ 
+    "name" : "IoT Data enabled NFT Collection {#1}",
+    "description" : "IoT data enabled NFT collection for Data Ownership/Control scheme masters project demonstration",
+    "image" : "ipfs://{ContentID of the stored image (or IoT data}", 
+    "data" : "ipfs://{CID of the IoT DATA",
+    "edition" : 1,
+    "attributes" : [ 
+        {
+            "trait_type": "Background",
+            "value": "dark"
+        },
+        {
+            "trait_type": "Body",
+            "value": "athletic"
+        },
+        {
+            "trait_type": "Head",
+            "value": "green"
+        }
+    ]
+}
