@@ -1255,8 +1255,8 @@ contract EE5003v1 is ERC721Enumerable, Ownable {   //contract interfaces defined
     constructor() ERC721("IoT Data enabled NFT Collection", "IDC") {} //construtor takes NFT title, Token symbol (IDC: IoT Data Collection)
         // internal
         function _baseURI() internal view virtual override returns (string memory) {
-        return "ipfs://EE5MmqVp5MmqVp7ZRMBBizicVh9ficVh9fjUofWicVh9f/";   //needs to be updated. This stores the metafile location in IPFS
-        //return "ipfs://EE5MmqVp5MmqVp7ZRMBBizicVh9ficVh9fjUofWicVh9f/{token ID}.json"; happens after an NFT is minted, appends token id and extension
+        return "ipfs://QmXdJnVnoitWQwiSGiEp9ZQssm4HWRXD93f7GWQuN6KGWK/";   //CID to meta folder
+        //eg. return "ipfs://QmXdJnVnoitWQwiSGiEp9ZQssm4HWRXD93f7GWQuN6KGWK/{token ID}.json"; happens after an NFT is minted, appends token id and extension automatically
     }
         // public
 

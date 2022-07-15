@@ -65,5 +65,31 @@ Steps:
 
     - //note: may need to include another address for the data and have an image to represent the NFT
     - //attributes are image attributes, what makes the images unique (colours, facial expressions, changes etc.)
+    - NOTE: JSON FILE NEEDS TO BE REPLICATED MANUALLY (V1) FOR EACH NFT IMAGE
 
-* Installed IPFS
+12/07/2022
+* Installed and Initialized IPFS-command line on Laptop
+image.png
+* Created metafiles for each of the art images
+* Uploaded folders (art & metdata) to IPFS (V2 for IoT I will use the http-client in node js for this probably (easier))
+* note; Metafiles link to art image
+
+15/07/2022
+* Updated smart contract with the CID for the metafolder
+* Deployed (minted) the smart contract on the blockchain using remix.ethereum.org IDE
+    - copy the contract to the IDE and compiled from there
+    - Deployed on the Rinkeby testnet successfully, returned contract address
+    - Updated App.js (Mint Button) to include the contract address (ie. calls the contract on Mint click)
+
+    image.png
+
+    image.png
+
+    - Retrieved ABI (API) from the deployed contract (EE5003v1) and created a constant in App.js to store this
+    - Retreived Contract address and created a second constant in App.js to store this
+* NOTE: Ran into errors testing here by launching the react server
+        - errors 'account' not defined, 'contract' not defined
+        - resolved errors by creating a NULL variable for account & contract
+        - patching required for reach node modules - delayed 
+* Seperated Mint and Connect Wallet functions to clean up code
+* Tested Connect Wallet button (working) connects to metamask wallet in the browser
