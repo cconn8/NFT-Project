@@ -4,3 +4,6 @@
 [submodule "nft-storage-system"]
 	path = nft-storage-system
 	url = https://github.com/dappuniversity/starter_kit_2
+[submodule "starter_kit_2"]
+	path = starter_kit_2
+	url = https://github.com/dappuniversity/starter_kit_2
