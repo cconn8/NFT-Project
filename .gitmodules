@@ -1,3 +1,6 @@
 [submodule "nft-marketplace"]
 	path = nft-marketplace
 	url = https://github.com/dappuniversity/nft_marketplace
+[submodule "nft-storage-system"]
+	path = nft-storage-system
+	url = https://github.com/dappuniversity/starter_kit_2
