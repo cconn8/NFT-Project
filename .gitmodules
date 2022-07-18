@@ -1,0 +1,3 @@
+[submodule "nft-marketplace"]
+	path = nft-marketplace
+	url = https://github.com/dappuniversity/nft_marketplace
