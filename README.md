@@ -12,10 +12,17 @@ Overview:
 
 
 Packages/Dependencies:
+- Stage 1 - NFT app
 * Node js library to build/install react,js server
 * Web3 package to interface with a browser based wallet (ie. metamask) : 'npm i web3'
 * ethers library to coommunicate with the smart contract : 'npm i ethers'
 * bootstrap for visuals/styling on the web server : 'npm install react-bootstrap bootstrap'
+
+- Stage 2 - Storage app
+* Node js
+* Ganache (personal local blockchain for testing)
+* //NOT USED: Truffle framework for developing and testing smartc contracts
+* Hardhat development (smart contracts) npm install --save-dev hardhat@2.8.4
 
 
 Steps:
@@ -24,12 +31,12 @@ Steps:
 3. Create GUI dashboard (app.js) using html/css
 
 
-06/07/2022 - basic GUI
+06/07/2022 - basic GUI (Stage 1)
 * Updated the front end to include several new buttons, basic layout
 * Details form, buttons and labels
 
 
-07/07/2022 - basic GUI
+07/07/2022 - basic GUI (Stage 1)
 * Added Sell/Transfer button
 * Spacing between components
 * Enable connect wallet button to allow user to interact with the blockchain (Wallet Required (dependencie))
@@ -38,7 +45,7 @@ Steps:
     - Linked to Connect Wallet button (OnClick)
     - Useful documentation "https://docs.ethers.io" for viewing available functions calls the for Smart Contracts
 
-08/07/2022 - smart contract
+08/07/2022 - smart contract  (Stage 1)
 * Created Smart Contract (ERC21 - layer 2 token) - setting the contract name to EE5003v1
 * Solidity used (https://docs.openzeppelin.com/contracts/4.x/wizard) used for creating templates
     - SC composed of interfaces, attributes and functions 
@@ -56,7 +63,7 @@ Steps:
         - ctrl-all the file and go to remix.ethereum.org (public IDE) to interact directly with the smart contract (ie. Mint the contract on the blockchain - testnet)
 
 
-11/07/2022 - nft preperation/upload to IPFS
+11/07/2022 - nft preperation/upload to IPFS  (Stage 1)
 * Create test IPFS store using a simple jpeg photo (later IoT data will be stored)
 * NOTE - IPFS pinning. To ensure always available data, the data needs to be pinned using a service (pinata) or using local IPFS node to store (pin) the file
 * Created two folders locally on my machine under storage folders in NFT project directory (1. art (nft image) folder, 2. metadata folder)
@@ -67,14 +74,14 @@ Steps:
     - //attributes are image attributes, what makes the images unique (colours, facial expressions, changes etc.)
     - NOTE: JSON FILE NEEDS TO BE REPLICATED MANUALLY (V1) FOR EACH NFT IMAGE
 
-12/07/2022
+12/07/2022  (Stage 1)
 * Installed and Initialized IPFS-command line on Laptop
 image.png
 * Created metafiles for each of the art images
 * Uploaded folders (art & metdata) to IPFS (V2 for IoT I will use the http-client in node js for this probably (easier))
 * note; Metafiles link to art image
 
-15/07/2022
+15/07/2022  (Stage 1)
 * Updated smart contract with the CID for the metafolder
 * Deployed (minted) the smart contract on the blockchain using remix.ethereum.org IDE
     - copy the contract to the IDE and compiled from there
@@ -93,3 +100,12 @@ image.png
         - patching required for reach node modules - delayed 
 * Seperated Mint and Connect Wallet functions to clean up code
 * Tested Connect Wallet button (working) connects to metamask wallet in the browser
+* NOTE: Errors interfacing the GUI with Metamask Wallet (To be reviewed)
+
+17/07/2022 Develop IPFS / DApp Storage System to upload data (Stage 2)
+* Architecture:
+
+image.png
+
+* Cloned dApp university Starter kit for baseline (git clone https://github.com/dappuniversity/starter_kit)
+* installed project dependencies (listed in package.json) with 'npm install'
