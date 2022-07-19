@@ -15,10 +15,13 @@
 * Created NFT Transfer contract (Marketplace)
 * Deployed and tested on the blockchain (hardhat as above)
 
+** NOTE: Failed to run tests/deployments because hardhat wasn't running. Resolved by running 'npm hardhat node' in the terminal and then running the deployment command in a new terminal. Node also needs to be running. 
+
 image.png
 
 * Created testing scripts for smart contract testing (hardhat framework lets us write tests for these)
-* Tested contracts using 'npx hardhat test' - Pased!!
-
+* Tested contracts using 'npx hardhat test' - Passed!!
 
 image.png
+
+* Contracts Test 2 failing on 'npx hardhat test' (TypeError: nft.tokenCount is not a function)

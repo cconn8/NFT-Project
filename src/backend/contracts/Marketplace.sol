@@ -17,6 +17,6 @@ contract Marketplace is ReentrancyGuard {
     constructor(uint _feePercent) {
         feeAccount = payable(msg.sender);
         feePercent = _feePercent;
-    } 
+    }  
 
 }
