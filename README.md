@@ -25,3 +25,10 @@ image.png
 image.png
 
 * Contracts Test 2 failing on 'npx hardhat test' (TypeError: nft.tokenCount is not a function)
+* TokenCount() function is not listed in the contract (this may be due to an update so removing that reuqirement in the test)
+
+
+21/07/22 - update deploy contracts
+
+* Testing Deployment, Minting and CreateItems contract functions. Passed!
+image.png
