@@ -32,3 +32,26 @@ image.png
 
 * Testing Deployment, Minting and CreateItems contract functions. Passed!
 image.png
+
+02/08/2022
+* Created purchase item function
+* Implemented purchase function test script - failure due to price discrepencies
+** NEED TO REVIEW THIS ^ before deploying the Smart Contract to the blockchain
+* After deploying the contracts to the Blockchain, meta files are stored in '/frontend/components/contractsData/' to be imported into App.js later
+
+
+03/08/2022
+* Front end improvements
+* Connected hardhat node dev net to metamask wallet
+** 1. Set up connection to the blockchain with ethers library - improvement
+** 2. Load contracts form the blockchain
+
+
+07/08/2022
+* Connect app to wallet --> hardhat chain (import { ethers }  from "ethers")
+* web4handler function to manafe metamask connections
+* Create navbar component for the front end app
+* Created pages for each nav component : Home, Create, MyListedItem, MyPurchases
+* Build out home page and markeplace interface with marketplace Load and Buy functions*
+* TESTING - Connecting to Metamask failing -- need to debug
+* Happy with front end look though, massive step up in UX design (more simplified, way nicer to view)
