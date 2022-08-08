@@ -3,7 +3,7 @@ import logo from './logo.png';
 import './App.css';
 import Navigation from './Navbar';
 import Home from './Home'
-// import Create from './Create'
+import Create from './Create'
 // import MyListedItem from './MyListedItem'
 // import MyPurchases from './MyPurchases'
 
@@ -52,8 +52,8 @@ function App() {
 
   return (
     <BrowserRouter>  
-      <div>
-        <Navigation web4Handler={web3Handler} account={account} />
+      <div className="App">
+        <Navigation web3Handler={web3Handler} account={account} />
         {/* handles the routing between pages on the frontend */}
         {/* check if the page is loading */}
         {/* if yes, print awaiting connection */}
@@ -65,8 +65,14 @@ function App() {
           // if false, render the page routes
         ) : (
         <Routes>
-          <Route path="/" element={<Home marketplace={marketplace} nft={nft}/>} />
-          <Route path="/create"  />
+          <Route path="/" element={
+            <Home marketplace={marketplace} nft={nft} /> 
+          } />
+
+          <Route path="/create" element={
+            <Create marketplace={marketplace} nft={nft} /> 
+          } />
+
           <Route path="/my-listed-items" />
           <Route path="/my-purchases"/>
         </Routes>

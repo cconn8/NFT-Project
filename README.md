@@ -55,3 +55,6 @@ image.png
 * Build out home page and markeplace interface with marketplace Load and Buy functions*
 * TESTING - Connecting to Metamask failing -- need to debug
 * Happy with front end look though, massive step up in UX design (more simplified, way nicer to view)
+
+08/08/2022
+* Connect Wallet functionality fixed. Typo in the code calling the wrong function (rookie mistake)

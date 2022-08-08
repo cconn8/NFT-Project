@@ -1,8 +1,7 @@
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap'
 import market from './market.png' //CHANGE IMAGE !!!!
-import App from './App'
 
 const Navigation = ({web3Handler, account}) => {
     return (
@@ -10,7 +9,7 @@ const Navigation = ({web3Handler, account}) => {
             <Container>
                 <Navbar.Brand href="https://www.dappuniversity.com/bootcamp">
                     <img src={market} width="40" height="40" className="" alt="" />
-                    &nbsp; The Internet of Things NFT Marketplace
+                    &nbsp; IoT Data Marketplace
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -29,7 +28,7 @@ const Navigation = ({web3Handler, account}) => {
                                 rel="noopener noreferrer"
                                 className="button nav-buttin btn-sm mx-4">
                                     <Button variant="outline-light">
-                                        account.slice(0,5) + '...' + account.slice(38,42)
+                                        {account.slice(0,5) + '...' + account.slice(38,42)}
                                     </Button>
                                 </Nav.Link>
                         // else display the connect wallet button
