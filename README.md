@@ -58,3 +58,7 @@ image.png
 
 08/08/2022
 * Connect Wallet functionality fixed. Typo in the code calling the wrong function (rookie mistake)
+* Built out the Create page with a data upload form for NFT metadata
+    * tested using a simple image for upload
+    * Getting caught on the makeItem() function in the marketplace contract
+    * Everything else works well so far
