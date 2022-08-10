@@ -62,3 +62,10 @@ image.png
     * tested using a simple image for upload
     * Getting caught on the makeItem() function in the marketplace contract
     * Everything else works well so far
+
+
+10/08/2022
+* Parked front end and NFT/Blockchain application to build out the IoT system
+* Components used are ADXL345 accelerometer and Raspberry Pi 4
+* Libraries and dependencies;
+    ** WiringPi

@@ -55,12 +55,16 @@ const Create = ({ marketplace, nft }) => {
         console.log("Retrieved IPFS path: " + uri)
 
         await (await nft.mint(uri)).wait()          // mint the nft on the blockchain
+        
         const id = await nft.tokenCount          // get the tokenId of the new nft
         console.log("token count complete!")
+        
         await (await nft.setApprovalForAll(marketplace.address, true)).wait() //approve/allow the marketplace to spend the nft
         const listingPrice = ethers.utils.parseEther(price.toString())       //create the listing on the market place.. add to markeplace
         console.log("listingPrice complete")
-        await (await marketplace.makeItem(nft.address, id, listingPrice)).wait()
+        
+        await(await marketplace.makeItem(nft.address, id, listingPrice)).wait()  //*** -BREAKING HERE!!!!1
+        console.log("makeitem complete")
 
         console.log("mintThenList function successfully complete!")
     }
