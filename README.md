@@ -68,4 +68,18 @@ image.png
 * Parked front end and NFT/Blockchain application to build out the IoT system
 * Components used are ADXL345 accelerometer and Raspberry Pi 4
 * Libraries and dependencies;
-    ** WiringPi
+    * WiringPi
+    * npm i ws (node.js websocket package) (not working )
+* GOAL: 
+* GUI-Connect opens a socket connection (listening***)
+* RPi opens a client connection and connects to the listening port
+* RPi gathers and sends accelerometer data as payload to the server - displays the data for the user
+* The user proceeds to upload the data with an image to IPFS to mint the NFT
+
+11/08/2022
+* Install express, cors nodemon and socket.io libraries
+* Implemented socket.io client (App.js) and backend server (Receiver - index.js)
+* The server will listen for incoming messages (connections) and take in the message/object
+* It will then render the received data to useState variables on the front end
+* Working with simple "Hello Messages" - need to pass objects now
+

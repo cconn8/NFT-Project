@@ -4,10 +4,12 @@ import './App.css';
 import Navigation from './Navbar';
 import Home from './Home'
 import Create from './Create'
+import io from 'socket.io-client'   
 // import MyListedItem from './MyListedItem'
 // import MyPurchases from './MyPurchases'
 
 import { useState } from 'react'   //allows us to store data on front end (like a mini database) with this USE state hook
+import { useEffect } from 'react';
 import { ethers }  from "ethers"  //allows to talk to ethereum nodes. Connects to metamask
 // import { loadFixture } from 'ethereum-waffle';
 
@@ -18,13 +20,18 @@ import NFTAbi from '../contractsData/NFT.json'
 import NFTAddress from '../contractsData/NFT-address.json'
 import { Spinner } from 'react-bootstrap';
  
+const socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
+
 function App() {
   /* Use State hooks allow us to store data on the front end
-    - like mini databases - Store each contract into the state of the blockchain*/
+    - like mini databases - Store each contract into the state of the blockchain
+    - first argument is the state variable name, second is the function name that assigns its value */
   const [loading, setLoading] = useState(true)
   const [account, setAccount] = useState(null)
   const [nft, setNFT] = useState(null)
-  const [ marketplace, setMarketplace] = useState(null)
+  const [marketplace, setMarketplace] = useState(null)
+  const [message, setMessage] = useState("")
+
 
   //Metamask login/Connect - manage the connection to metamask interface to blockchain
   const web3Handler = async() => { 
@@ -49,11 +56,22 @@ function App() {
     setLoading(false)
   }
 
+  const sendMessage = () => {
+    socket.emit("send_message",  {message})
+  }
+
+  //listens for events
+  useEffect(() => {
+    socket.on('receive_message', (data) => {
+      console.log(data.message)
+    })
+  }, [socket])
 
   return (
     <BrowserRouter>  
       <div className="App">
-        <Navigation web3Handler={web3Handler} account={account} />
+        <Navigation web3Handler={web3Handler} account={account} sendMessage={sendMessage}/>
+
         {/* handles the routing between pages on the frontend */}
         {/* check if the page is loading */}
         {/* if yes, print awaiting connection */}
