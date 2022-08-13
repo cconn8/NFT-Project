@@ -30,8 +30,8 @@ function App() {
   const [account, setAccount] = useState(null)
   const [nft, setNFT] = useState(null)
   const [marketplace, setMarketplace] = useState(null)
-  const [message, setMessage] = useState("")
-
+  const [connect, setConnect] = useState(false)
+  const [message, setMessage] = useState("Payload passed, needs to rendered to the form page")
 
   //Metamask login/Connect - manage the connection to metamask interface to blockchain
   const web3Handler = async() => { 
@@ -56,6 +56,16 @@ function App() {
     setLoading(false)
   }
 
+  const connectToServer = (socket) => {
+    socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
+  }
+
+  //when the const socket variable is declared, if a connection to the server is established
+  //it will emit this event to the server
+  socket.on('connect', () => {
+    socket.emit("connect_event", {message:"Hi I am App.js frontend"})
+  })
+
   const sendMessage = () => {
     socket.emit("send_message",  {message})
   }
@@ -67,10 +77,19 @@ function App() {
     })
   }, [socket])
 
+  // replaced by (connection_received) call back function on connect emit()
+  useEffect(() => {
+    socket.on('received_event', (data) => {
+      console.log(data)
+      alert(data.message)
+      setConnect(true)
+    }, [socket])
+  })
+
   return (
     <BrowserRouter>  
       <div className="App">
-        <Navigation web3Handler={web3Handler} account={account} sendMessage={sendMessage}/>
+        <Navigation web3Handler={web3Handler} account={account} sendMessage={sendMessage} connectToServer={socket}/>
 
         {/* handles the routing between pages on the frontend */}
         {/* check if the page is loading */}

@@ -2,9 +2,10 @@
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap'
 import market from './market.png' //CHANGE IMAGE !!!!
+import { connect } from 'socket.io-client';
 
 
-const Navigation = ({web3Handler, account, sendMessage, setMessage}) => {
+const Navigation = ({web3Handler, account, sendMessage, setMessage, connectToServer}) => {
     return (
         <Navbar expand="lg" bg="secondary" variant="dark">
             <Container>
@@ -43,19 +44,19 @@ const Navigation = ({web3Handler, account, sendMessage, setMessage}) => {
                             
                         )}
                         {/* DEVICE CONNECTION IF? */}
-                        {/* {message ? (
+                        {connect ? (
                             <Nav.Link
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="button nav-buttin btn-sm mx-4">
                                     <Button variant="outline-light">
-                                       Send Message 
+                                       Connected to Server 
                                     </Button>
                                 </Nav.Link>
                         // else display the connect wallet button
                         ) : (
-                            <Button onClick={sendMessage} variant="outline-light">Sent</Button>
-                        )} */}
+                            <Button onClick={connectToServer} variant="outline-light">Connect Backend</Button>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

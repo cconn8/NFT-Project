@@ -83,3 +83,11 @@ image.png
 * It will then render the received data to useState variables on the front end
 * Working with simple "Hello Messages" - need to pass objects now
 
+13/08/2022
+* Implement iotclient on the Raspberry pi
+    * The IoT client is a socket.io client that interfaces the adxl345 on the backend and passes data over http to the webservice (NFT Application)
+* Libraries and dependencies
+    * pip3 install "python-socketio[client]"
+    * pip3 install "python-socketio[asyncio_client]"
+* Successfull implementation of client/server system between the RPi and Application backend server
+* The RPi sends a basic payload to the server and waits for a received event
