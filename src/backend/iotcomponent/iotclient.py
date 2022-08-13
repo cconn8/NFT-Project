@@ -1,35 +1,44 @@
-#import asyncio
 import sys
-import socketio
-import time
+#import asyncio 
+import socketio      
+import time                     
 
 sio = socketio.Client()
 
-@sio.event
-def connect():
-	print('Connected')
-	client_message = sio.call('connect_event', {'message': "Hi, this is RPi"})
-#	print(client_message)
+
+# NOTE: the events are created after the server side function is create_default_context
+# everything on the client side is in response to the server (event)
+# the client prints connected when it receives confirmation it has connected to the server
+# confitmation is returned in the form of a connect event sio.on('connect')  OR connect()
 
 @sio.event
-def connect_error(e):
-	print('Connection failed')
+def connect():
+        print('Connected')
+        sio.emit('client_connected', {'message': "Hi, this is RPi"})
+#       print(client_message)
 
 @sio.event
 def disconnect():
-	print('Disconnected')
+        print('Disconnected')
 
+# Emit (Send) data to the server and wait for response
+def send_data(data):
+        sio.emit('send_data', {'message': data})
+        # return 'Thanks for acknowleding Server!'
+
+# Server returns a message as confirmation for send_data
+# Catch is with an event listener here
 @sio.event
-def send_data():
-	payload = sio.call('data_event', {'message': "IoT Data Placeholder"})
-	print(payload)
+def data_received(data):
+    print(data)
 
 def main():
-	sio.connect('http://192.168.1.7:3001')
-#	time.sleep(1)
-	sio.send_data()
-	sio.wait()
+        sio.connect('http://192.168.1.7:3001')
+        send_data("IoT Data Placeholder")
+        # sio.received_event()
+        sio.wait()
 
 
 if __name__ == '__main__':
-	main()
+        main()
+
