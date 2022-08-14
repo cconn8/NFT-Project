@@ -95,7 +95,10 @@ image.png
 
 14/08/2022
 * Ineterface ADXL345 to RPi4 and begin collecting data
-* Using SMBus and I2C protocol 
+* Accessing the device via SMbus protocol over the I2C interface on the raspberry pi
+* Dependencies
+    * install cffi on the RPi to call C code using Python (pip install cffi)
+    * install smbus via cffi (pip install smbus-cffi)
 * Pin setup  
     * Pin1 3.3v -to-  ADXL345 Vcc
     * Pin3 I2C SDA -to- ADXL345 SDA
