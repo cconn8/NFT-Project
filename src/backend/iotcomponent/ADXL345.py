@@ -3,29 +3,36 @@ import time
 
 
 class ADXL345:
+    
+    # Constructor/Initializer takes instance as argument (self)
+    def __init__(self):
+    	# Get I2C bus
+    	self.bus = smbus.SMBus(1)
+	
+    def set_registers(self):
+    	bus = self.bus
+	# ADXL345 address, 0x53(83)
+    	# Select bandwidth rate register, 0x2C(44)
+    	# 0x0A(10)-Normal mode, Output data rate = 100 Hz
+    	bus.write_byte_data(0x53, 0x2C, 0x0A)
 
-    # Get I2C bus
-    bus = smbus.SMBus(1)
+    	# ADXL345 address, 0x53(83)
+    	# Select power control register, 0x2D(45)
+    	# 0x08(08)-Auto Sleep disable
+    	bus.write_byte_data(0x53, 0x2D, 0x08)
 
-    # ADXL345 address, 0x53(83)
-    # Select bandwidth rate register, 0x2C(44)
-    # 0x0A(10)-Normal mode, Output data rate = 100 Hz
-    bus.write_byte_data(0x53, 0x2C, 0x0A)
+    	# ADXL345 address, 0x53(83)
+    	# Select data format register, 0x31(49)
+    	# 0x08(08)-Self test disabled, 4-wire interface
+    	# Full resolution, Range = +/-2g
+    	bus.write_byte_data(0x53, 0x31, 0x08)
 
-    # ADXL345 address, 0x53(83)
-    # Select power control register, 0x2D(45)
-    # 0x08(08)-Auto Sleep disable
-    bus.write_byte_data(0x53, 0x2D, 0x08)
+    	time.sleep(0.5)
 
-    # ADXL345 address, 0x53(83)
-    # Select data format register, 0x31(49)
-    # 0x08(08)-Self test disabled, 4-wire interface
-    # Full resolution, Range = +/-2g
-    bus.write_byte_data(0x53, 0x31, 0x08)
 
-    time.sleep(0.5)
-
-    def read_register_data(bus=bus):
+    def read_register_data(self):
+	
+	bus = self.bus
         # ADXL345 address, 0x53(83)
         # Read data back from 0x32(50), 2 bytes
         # X-Axis LSB, X-Axis MSB
@@ -59,9 +66,12 @@ class ADXL345:
         if zAccl > 511 :
             zAccl -= 1024
 
-        print("{} Acceleration in X-Axis : {}".format(time.now(), xAccl))
-        print("{} Acceleration in Y-Axis : {}".format(time.now(), yAccl))
-        print("{} Acceleration in Z-Axis : {}".format(time.now(), zAccl))
+        print(" Acceleration in X-Axis : {}, Y-Axis : {}, Z-Axis : {}".format(xAccl, yAccl, zAccl))
+        print(" -------------------------------------------------------------------------")
+	#index = index+1
+
+	time.sleep(2)
+
         return xAccl, yAccl, zAccl
 
     # Output data to screen
@@ -72,3 +82,7 @@ def main():
     c1 = ADXL345()
     while True:
         c1.read_register_data()
+
+
+if __name__ == '__main__':
+	main()
