@@ -2,15 +2,15 @@ import json
 import smbus
 import time
 import socket
-
+import datetime
 
 class ADXL345:
-    
+
     # Constructor/Initializer takes instance as argument (self)
     def __init__(self):
     	# Get I2C bus
     	self.bus = smbus.SMBus(1)
-	
+
     def set_registers(self):
     	bus = self.bus
 	    # ADXL345 address, 0x53(83)
@@ -33,7 +33,7 @@ class ADXL345:
 
 
     def read_register_data(self):
-	
+
         bus = self.bus
         # ADXL345 address, 0x53(83)
         # Read data back from 0x32(50), 2 bytes
@@ -68,35 +68,36 @@ class ADXL345:
         if zAccl > 511 :
             zAccl -= 1024
 
-        print(" Acceleration in X-Axis : {}, Y-Axis : {}, Z-Axis : {}".format(xAccl, yAccl, zAccl))
-        print(" -------------------------------------------------------------------------")
-    
+#        print(" Acceleration in X-Axis : {}, Y-Axis : {}, Z-Axis : {}".format(xAccl, yAccl, zAccl))
+#       print(" -------------------------------------------------------------------------")
 
         time.sleep(2)
 
         payload = {'ADXL345 Acceleration' : [{
-            'Producer' : socket.gethostname(),
-            'Timestamp': datetime.time(),
+            'Producer' : str(socket.gethostname()),
+#            'Timestamp': datetime.time(),
             'X-Axis': xAccl,
             'Y-Axis': yAccl,
             'Z-Axis': zAccl
         }]}
 
-        return payload
+	return payload
 
-        def timeout(self, datasize):
-            payload_list = []
-            for i in range(0, len(datasize)):
-                payload_list.append(self.read_register_data(self, 10))
+    def timeout(self):
+	#datasize=10
+	payload_list = []
+	for i in range(0, 10):
+		payload_list.append(self.read_register_data())
 
-            print("Timeout!!")
-            payload_list = json.dumps(payload_list)
-            return payload_list
+	print("Timeout!!")
+	payload_list = json.dumps(payload_list)
+	return payload_list
 
 def main():
 
-    c1 = ADXL345()
-    c1.timeout(10)
+#    c1 = ADXL345()
+#    payload = c1.timeout()
+#    print(payload)
 
 
 if __name__ == '__main__':
