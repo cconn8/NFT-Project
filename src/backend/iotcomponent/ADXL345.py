@@ -1,4 +1,4 @@
-import smbus
+3WSimport smbus
 import time
 
 # Get I2C bus
@@ -6,16 +6,16 @@ bus = smbus.SMBus(1)
 
 # ADXL345 address, 0x53(83)
 # Select bandwidth rate register, 0x2C(44)
-#		0x0A(10)	Normal mode, Output data rate = 100 Hz
+# 0x0A(10)-Normal mode, Output data rate = 100 Hz
 bus.write_byte_data(0x53, 0x2C, 0x0A)
 # ADXL345 address, 0x53(83)
 # Select power control register, 0x2D(45)
-#		0x08(08)	Auto Sleep disable
+# 0x08(08)-Auto Sleep disable
 bus.write_byte_data(0x53, 0x2D, 0x08)
 # ADXL345 address, 0x53(83)
 # Select data format register, 0x31(49)
-#		0x08(08)	Self test disabled, 4-wire interface
-#					Full resolution, Range = +/-2g
+# 0x08(08)-Self test disabled, 4-wire interface
+# Full resolution, Range = +/-2g
 bus.write_byte_data(0x53, 0x31, 0x08)
 
 time.sleep(0.5)
