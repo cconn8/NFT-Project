@@ -81,17 +81,17 @@ class ADXL345:
             'Z-Axis': zAccl
         }]}
 
-	return payload
+	    return payload
 
     def timeout(self):
-	#datasize=10
-	payload_list = []
-	for i in range(0, 10):
-		payload_list.append(self.read_register_data())
+        #datasize=10
+        payload_list = []
+        for i in range(0, 10):
+            payload_list.append(self.read_register_data())
 
-	print("Timeout!!")
-	payload_list = json.dumps(payload_list)
-	return payload_list
+        print("Timeout!!")
+        payload_list = json.dumps(payload_list)
+        return payload_list
 
 def main():
 
