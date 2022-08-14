@@ -20,8 +20,9 @@ def connect():
         #create an object of the ADXL class
         obj = adxl.ADXL345()
         #call the timeout function (to return the payload)
-        payload = obj.timeout(10)
+        payload = obj.timeout()
         #emit the send_data function with the reurned payload
+        send_data(payload)
 
 @sio.event
 def disconnect():
@@ -40,8 +41,8 @@ def data_received(data):
 
 def main():
         sio.connect('http://192.168.1.7:3001')
-        send_data("IoT Data Placeholder")
-        # sio.received_event()
+        #send_data("IoT Data Placeholder")
+        #sio.received_event()
         sio.wait()
 
 

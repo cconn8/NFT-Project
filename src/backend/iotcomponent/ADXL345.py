@@ -95,6 +95,7 @@ class ADXL345:
         return payload_list
 
 def main():
+    return
 
 #    c1 = ADXL345()
 #    payload = c1.timeout()

@@ -104,3 +104,5 @@ image.png
     * Pin3 I2C SDA -to- ADXL345 SDA
     * Pin5 I2C SCL -to- ADXL345 SCL
     * Pin6 GND -to- ADXL345 GND
+* Client (RPi) successfully gather data and sending JSON loads to the Server
+* TO DO: Render the received data on the server side to the upload page in the frontend web app ******
