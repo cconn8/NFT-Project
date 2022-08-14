@@ -91,3 +91,13 @@ image.png
     * pip3 install "python-socketio[asyncio_client]"
 * Successfull implementation of client/server system between the RPi and Application backend server
 * The RPi sends a basic payload to the server and waits for a received event
+
+
+14/08/2022
+* Ineterface ADXL345 to RPi4 and begin collecting data
+* Using SMBus and I2C protocol 
+* Pin setup  
+    * Pin1 3.3v -to-  ADXL345 Vcc
+    * Pin3 I2C SDA -to- ADXL345 SDA
+    * Pin5 I2C SCL -to- ADXL345 SCL
+    * Pin6 GND -to- ADXL345 GND
