@@ -1,5 +1,7 @@
+import json
 import smbus
 import time
+import socket
 
 
 class ADXL345:
@@ -11,7 +13,7 @@ class ADXL345:
 	
     def set_registers(self):
     	bus = self.bus
-	# ADXL345 address, 0x53(83)
+	    # ADXL345 address, 0x53(83)
     	# Select bandwidth rate register, 0x2C(44)
     	# 0x0A(10)-Normal mode, Output data rate = 100 Hz
     	bus.write_byte_data(0x53, 0x2C, 0x0A)
@@ -32,7 +34,7 @@ class ADXL345:
 
     def read_register_data(self):
 	
-	bus = self.bus
+        bus = self.bus
         # ADXL345 address, 0x53(83)
         # Read data back from 0x32(50), 2 bytes
         # X-Axis LSB, X-Axis MSB
@@ -68,20 +70,33 @@ class ADXL345:
 
         print(" Acceleration in X-Axis : {}, Y-Axis : {}, Z-Axis : {}".format(xAccl, yAccl, zAccl))
         print(" -------------------------------------------------------------------------")
-	#index = index+1
+    
 
-	time.sleep(2)
+        time.sleep(2)
 
-        return xAccl, yAccl, zAccl
+        payload = {'ADXL345 Acceleration' : [{
+            'Producer' : socket.gethostname(),
+            'Timestamp': datetime.time(),
+            'X-Axis': xAccl,
+            'Y-Axis': yAccl,
+            'Z-Axis': zAccl
+        }]}
 
-    # Output data to screen
+        return payload
 
+        def timeout(self, datasize):
+            payload_list = []
+            for i in range(0, len(datasize)):
+                payload_list.append(self.read_register_data(self, 10))
+
+            print("Timeout!!")
+            payload_list = json.dumps(payload_list)
+            return payload_list
 
 def main():
 
     c1 = ADXL345()
-    while True:
-        c1.read_register_data()
+    c1.timeout(10)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,8 @@
 import sys
 #import asyncio 
 import socketio      
-import time                     
+import time     
+import ADXL345 as adxl                
 
 sio = socketio.Client()
 
@@ -15,7 +16,12 @@ sio = socketio.Client()
 def connect():
         print('Connected')
         sio.emit('client_connected', {'message': "Hi, this is RPi"})
-#       print(client_message)
+        
+        #create an object of the ADXL class
+        obj = adxl.ADXL345()
+        #call the timeout function (to return the payload)
+        payload = obj.timeout(10)
+        #emit the send_data function with the reurned payload
 
 @sio.event
 def disconnect():
