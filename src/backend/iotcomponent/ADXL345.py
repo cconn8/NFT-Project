@@ -68,7 +68,7 @@ class ADXL345:
         if zAccl > 511 :
             zAccl -= 1024
 
-#        print(" Acceleration in X-Axis : {}, Y-Axis : {}, Z-Axis : {}".format(xAccl, yAccl, zAccl))
+#       print(" Acceleration in X-Axis : {}, Y-Axis : {}, Z-Axis : {}".format(xAccl, yAccl, zAccl))
 #       print(" -------------------------------------------------------------------------")
 
         time.sleep(2)
@@ -80,8 +80,8 @@ class ADXL345:
             'Y-Axis': yAccl,
             'Z-Axis': zAccl
         }]}
-
-	    return payload
+        
+        return payload
 
     def timeout(self):
         #datasize=10
@@ -91,6 +91,7 @@ class ADXL345:
 
         print("Timeout!!")
         payload_list = json.dumps(payload_list)
+        
         return payload_list
 
 def main():
