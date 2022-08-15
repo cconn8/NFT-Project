@@ -6,7 +6,7 @@ import { create as ipfsHttpClient } from 'ipfs-http-client' //interface to ipfs
 //instantiate ipfs client
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
-const Create = ({ marketplace, nft }) => {
+const Create = ({ marketplace, nft, file}) => {
 
     //create states for what we want to keep track of in the app
     const[image, setImage] = useState('')  // image to represent nft metatdata
