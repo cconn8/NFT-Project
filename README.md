@@ -124,3 +124,6 @@ image.png
 
 NEXT: Need to pass the file to the upload field in the create form
 	This starts the NFT creation mechanism  of the system	
+
+    * Successfully rendering the fileobject to dropdown on Create.js page
+    * Issue calling the upload to IPFS function on the object
