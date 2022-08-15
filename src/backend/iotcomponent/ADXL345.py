@@ -80,7 +80,7 @@ class ADXL345:
             'Y-Axis': yAccl,
             'Z-Axis': zAccl
         }]}
-        
+        print(payload)
         return payload
 
     
@@ -117,11 +117,10 @@ class ADXL345:
 
 
 def main():
-    return
-
-#    c1 = ADXL345()
-#    payload = c1.timeout()
-#    print(payload)
+	c1 = ADXL345()
+	while(1):
+		payload = c1.read_register_data()
+        #        print(payload)
 
 
 if __name__ == '__main__':
