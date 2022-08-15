@@ -6,7 +6,8 @@ Credits:
 DAPP University Starter kit developed by Ethan-Crypto leveraged as a starting point for the project on NFT side. The code can be found here: https://github.com/dappuniversity/starter_kit_2/tree/c7557aa2518c4338f1562abe3afd03ae244d42ef
 Thanks @Ethan-Crypto
 
-## Dependencies
+
+# Dependencies
 * react-router-dom@6 (for routing between pages in the app)
 * ipfs-http-client@56.0.1
 * npm i @openzeppelin/contracts@4.5.0 library
