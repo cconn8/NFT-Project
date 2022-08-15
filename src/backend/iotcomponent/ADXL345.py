@@ -3,34 +3,34 @@ import smbus
 import time
 import socket
 import datetime
+import os
 
 class ADXL345:
 
     # Constructor/Initializer takes instance as argument (self)
     def __init__(self):
-    	# Get I2C bus
-    	self.bus = smbus.SMBus(1)
+        # Get I2C bus
+        self.bus = smbus.SMBus(1)
+        
 
     def set_registers(self):
-    	bus = self.bus
-	    # ADXL345 address, 0x53(83)
-    	# Select bandwidth rate register, 0x2C(44)
-    	# 0x0A(10)-Normal mode, Output data rate = 100 Hz
-    	bus.write_byte_data(0x53, 0x2C, 0x0A)
-
-    	# ADXL345 address, 0x53(83)
+        bus = self.bus
+        # ADXL345 address, 0x53(83)
+        # Select bandwidth rate register, 0x2C(44)
+        # 0x0A(10)-Normal mode, Output data rate = 100 Hz
+        bus.write_byte_data(0x53, 0x2C, 0x0A)
+        
+        # ADXL345 address, 0x53(83)
     	# Select power control register, 0x2D(45)
     	# 0x08(08)-Auto Sleep disable
-    	bus.write_byte_data(0x53, 0x2D, 0x08)
+        bus.write_byte_data(0x53, 0x2D, 0x08)
 
     	# ADXL345 address, 0x53(83)
     	# Select data format register, 0x31(49)
     	# 0x08(08)-Self test disabled, 4-wire interface
     	# Full resolution, Range = +/-2g
-    	bus.write_byte_data(0x53, 0x31, 0x08)
-
-    	time.sleep(0.5)
-
+        bus.write_byte_data(0x53, 0x31, 0x08)
+        time.sleep(0.5)
 
     def read_register_data(self):
 
@@ -83,6 +83,15 @@ class ADXL345:
         
         return payload
 
+    
+    def writeFile(self, payload):
+        filepath = './files/dataFile.json'
+        with open(filepath, 'w') as f:
+            #f.write(payload)
+            json.dump(filepath, payload)
+
+        return filepath
+
     def timeout(self):
         #datasize=10
         payload_list = []
@@ -90,9 +99,16 @@ class ADXL345:
             payload_list.append(self.read_register_data())
 
         print("Timeout!!")
-        payload_list = json.dumps(payload_list)
+        print("Writing payload to file..")
+        # payload_list = json.dumps(payload_list)
+        payload_file = writeFile(payload_list)
         
-        return payload_list
+        # print("Opening payload file to serialize")
+        # with open(payload_file, 'r') as f:
+        #     payload = json.dumps(f)
+
+        return payload_file
+        
 
 def main():
     return

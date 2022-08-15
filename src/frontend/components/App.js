@@ -19,10 +19,12 @@ import MarketplaceAddress from '../contractsData/Marketplace-address.json'
 import NFTAbi from '../contractsData/NFT.json'
 import NFTAddress from '../contractsData/NFT-address.json'
 import { Spinner } from 'react-bootstrap';
- 
+
 const socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
 
 function App() {
+
+  var fileCount = 1
   /* Use State hooks allow us to store data on the front end
     - like mini databases - Store each contract into the state of the blockchain
     - first argument is the state variable name, second is the function name that assigns its value */
@@ -30,8 +32,15 @@ function App() {
   const [account, setAccount] = useState(null)
   const [nft, setNFT] = useState(null)
   const [marketplace, setMarketplace] = useState(null)
-  const [connect, setConnect] = useState(false)
-  const [message, setMessage] = useState("Payload passed, needs to rendered to the form page")
+  const [connect, setConnect] = useState(true)
+  const [file, setFile] = useState()
+
+  // const socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
+
+  const connectToServer = (socket) => {
+    socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
+    setConnect(true)
+  }
 
   //Metamask login/Connect - manage the connection to metamask interface to blockchain
   const web3Handler = async() => { 
@@ -56,10 +65,6 @@ function App() {
     setLoading(false)
   }
 
-  const connectToServer = (socket) => {
-    socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
-  }
-
   //when the const socket variable is declared, if a connection to the server is established
   //it will emit this event to the server
   socket.on('connect', () => {
@@ -69,6 +74,23 @@ function App() {
   const sendMessage = () => {
     socket.emit("send_message",  {message})
   }
+
+  //listed for file_received events from the server
+  //when the RPi sends a file and is received by the server, the server will broadcasst this to the front end
+  useEffect(() => {
+    
+    socket.on('file_received', (data) => {  
+      let filepath = './received_files/data_file_'+fileCount;
+      // const obj = JSON.parse(data)
+      console.log('file received on the frontend, rendering...')
+      const fs = require('fs')   //fs module to write data to a file
+      const file = fs.write(filepath, data, (err) => {
+        if(err) { throw(err); }
+        console.log("JSON data saved!")
+      })
+      setFile(file)
+    })
+  })
 
   //listens for events
   useEffect(() => {
@@ -107,7 +129,7 @@ function App() {
           } />
 
           <Route path="/create" element={
-            <Create marketplace={marketplace} nft={nft} /> 
+            <Create marketplace={marketplace} nft={nft} file={file}/> 
           } />
 
           <Route path="/my-listed-items" />
