@@ -4,8 +4,8 @@ import { Navbar, Nav, Button, Container } from 'react-bootstrap'
 import market from './market.png' //CHANGE IMAGE !!!!
 import { connect } from 'socket.io-client';
 
-
-const Navigation = ({web3Handler, account, sendMessage, setMessage, connectToServer}) => {
+// removed = sendMessage, setMessage, from Navigation arguments
+const Navigation = ({web3Handler, account, connectToServer}) => {
     return (
         <Navbar expand="lg" bg="secondary" variant="dark">
             <Container>
@@ -22,11 +22,11 @@ const Navigation = ({web3Handler, account, sendMessage, setMessage, connectToSer
                         <Nav.Link as={Link} to="/my-purchases">My Purchases</Nav.Link>
                     </Nav>
                     <Nav>
-                    <Button onClick={sendMessage} variant="outline-light" 
+                    {/* <Button onClick={sendMessage} variant="outline-light" 
                             onChange={(event) => {
                             setMessage(event.target.value)
                         }}> Send Message 
-                    </Button>
+                    </Button> */}
                         {/* if account is loaded (ie. web3handler called correctly), display account */}
                         {account ? (
                             <Nav.Link

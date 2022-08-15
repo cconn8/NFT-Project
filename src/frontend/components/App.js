@@ -5,6 +5,7 @@ import Navigation from './Navbar';
 import Home from './Home'
 import Create from './Create'
 import io from 'socket.io-client'   
+
 // import MyListedItem from './MyListedItem'
 // import MyPurchases from './MyPurchases'
 
@@ -71,23 +72,20 @@ function App() {
     socket.emit("connect_event", {message:"Hi I am App.js frontend"})
   })
 
-  const sendMessage = () => {
-    socket.emit("send_message",  {message})
-  }
+  // const sendMessage = () => {
+  //   socket.emit("send_message",  {message})
+  // }
 
   //listed for file_received events from the server
   //when the RPi sends a file and is received by the server, the server will broadcasst this to the front end
   useEffect(() => {
     
     socket.on('file_received', (data) => {  
-      let filepath = './received_files/data_file_'+fileCount;
-      // const obj = JSON.parse(data)
-      console.log('file received on the frontend, rendering...')
-      const fs = require('fs')   //fs module to write data to a file
-      const file = fs.write(filepath, data, (err) => {
-        if(err) { throw(err); }
-        console.log("JSON data saved!")
-      })
+
+      console.log('file received on the frontend, rendering state with setFile()...')
+      alert('file received on the frontend!!!')
+      socket.emit('received_on_front', {message:"File was rendered on the front end!"})
+      
       setFile(file)
     })
   })
@@ -108,10 +106,11 @@ function App() {
     }, [socket])
   })
 
+// removed sendMessage={sendMessage}  from nav arguments temporarily
   return (
     <BrowserRouter>  
       <div className="App">
-        <Navigation web3Handler={web3Handler} account={account} sendMessage={sendMessage} connectToServer={socket}/>
+        <Navigation web3Handler={web3Handler} account={account} connectToServer={socket}/>
 
         {/* handles the routing between pages on the frontend */}
         {/* check if the page is loading */}
