@@ -100,15 +100,21 @@ class ADXL345:
 
         print("Timeout!!")
         print("Writing payload to file..")
-        # payload_list = json.dumps(payload_list)
-        payload_file = writeFile(payload_list)
+        payload = json.dumps(payload_list)
+
+        payload_file = 'dataFile.json'
+        with open(payload_file, 'w') as f:
+            f.write(payload)
+            # json.dump(f, payload_list)
+
+        # payload_file = writeFile(payload_list)
         
         # print("Opening payload file to serialize")
         # with open(payload_file, 'r') as f:
         #     payload = json.dumps(f)
 
         return payload_file
-        
+
 
 def main():
     return
