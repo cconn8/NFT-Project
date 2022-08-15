@@ -106,3 +106,21 @@ image.png
     * Pin6 GND -to- ADXL345 GND
 * Client (RPi) successfully gather data and sending JSON loads to the Server
 * TO DO: Render the received data on the server side to the upload page in the frontend web app ******
+* SUCCESS - Test and confirmed the following;
+	- 1. Start the server (index.js) - server is listening
+	- 2. Start the App - the frontend page loads
+		- The user connects to backend (automatic when the server starts)
+		- The user connects his wallet
+
+	- 3. The iot client (RPI) starts and sends a connect request to the server
+		- On receipt of connection request;
+			- The iot client calls the timeout function which triggers the ADXL345
+			- When the treshold is reached, data gathered from the ADXL345 is written to a file, serialized and sent over socket connection to the server
+
+	- 4. When the Server receives the message;
+		- It sends a broacast message to indicate to the front end that a file was received
+		- The frontend (App.js) renders the file object and stores in state variable 'file'
+		- The front end Alerts to say the file is received!
+
+NEXT: Need to pass the file to the upload field in the create form
+	This starts the NFT creation mechanism  of the system	
