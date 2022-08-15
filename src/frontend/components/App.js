@@ -35,6 +35,8 @@ function App() {
   const [marketplace, setMarketplace] = useState(null)
   const [connect, setConnect] = useState(true)
   const [file, setFile] = useState()
+  const [alert, setAlert] = useState(false)
+  const [filename, setFilename] = useState('')
 
   // const socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
 
@@ -82,8 +84,8 @@ function App() {
     
     socket.on('file_received', (data) => {  
 
+      setFilename(data.message)
       console.log('file received on the frontend, rendering state with setFile()...')
-      alert('file received on the frontend!!!')
       socket.emit('received_on_front', {message:"File was rendered on the front end!"})
       
       setFile(file)
@@ -128,7 +130,7 @@ function App() {
           } />
 
           <Route path="/create" element={
-            <Create marketplace={marketplace} nft={nft} file={file}/> 
+            <Create marketplace={marketplace} nft={nft} file={file} filename={filename}/> 
           } />
 
           <Route path="/my-listed-items" />

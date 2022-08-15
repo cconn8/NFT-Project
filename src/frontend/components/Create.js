@@ -6,18 +6,15 @@ import { create as ipfsHttpClient } from 'ipfs-http-client' //interface to ipfs
 //instantiate ipfs client
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
-const Create = ({ marketplace, nft, file}) => {
+const Create = ({ marketplace, nft, file, filename}) => {
 
     //create states for what we want to keep track of in the app
-    const[image, setImage] = useState('')  // image to represent nft metatdata
-    const[data, setData] = useState('') //state variable for the IoT data
+    const[image, setImage] = useState()  // image to represent nft metatdata
+    const[data, setData] = useState() //state variable for the IoT data
     const[price, setPrice] = useState(null)
     const[name, setName] = useState('')
     const[description, setDescription] = useState('')
-
-    const collectFile = async(event) => {
-
-    }
+    const[dataFile, setDatafile] = useState(file)
 
     //upload function to IPFS
     //takes the image upload in the input field and stores it in IPFS -> returning the CID
@@ -42,7 +39,7 @@ const Create = ({ marketplace, nft, file}) => {
     //Improvement will be to integrate both of these upload to IPFS functions - kept them seperate due to time constraints
     const uploadDataToIPFS = async(event) => {
         event.preventDefault()
-        const file = file
+        const file = dataFile
         //check it is a valid file being uploaded
         if (typeof file !== 'undefined') {
             try {   //try/catch for potential errors with the upload 
@@ -104,7 +101,7 @@ const Create = ({ marketplace, nft, file}) => {
                             {/* form type takes a file as upload, calls the UploadDataToIPFS function */}
                             <Form.Control as="select" aria-label="Default select example" onChange={uploadDataToIPFS}>
                                 <option>Select your imported data file</option>
-                                <option value={"1."}>{file}</option>
+                                <option value={"1."}>{filename}</option>
                             </Form.Control>
                             {/* nft name field, once triggered calls the setName function passing the name on the input form */}
                             <Form.Control onChange={(e) => setName(e.target.value)} size="lg" type="text" placeholder="Name"/>
