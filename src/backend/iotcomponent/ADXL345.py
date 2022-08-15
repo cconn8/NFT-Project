@@ -71,7 +71,7 @@ class ADXL345:
 #       print(" Acceleration in X-Axis : {}, Y-Axis : {}, Z-Axis : {}".format(xAccl, yAccl, zAccl))
 #       print(" -------------------------------------------------------------------------")
 
-        time.sleep(2)
+        time.sleep(0.1)
 
         payload = {'ADXL345 Acceleration' : [{
             'Producer' : str(socket.gethostname()),
@@ -82,15 +82,6 @@ class ADXL345:
         }]}
         print(payload)
         return payload
-
-    
-    def writeFile(self, payload):
-        filepath = './files/dataFile.json'
-        with open(filepath, 'w') as f:
-            #f.write(payload)
-            json.dump(filepath, payload)
-
-        return filepath
 
     def timeout(self):
         #datasize=10
@@ -117,11 +108,12 @@ class ADXL345:
 
 
 def main():
-	c1 = ADXL345()
-	while(1):
-		payload = c1.read_register_data()
+	# c1 = ADXL345()
+	# while(1):
+	# 	payload = c1.read_register_data()
         #        print(payload)
 
+    return
 
 if __name__ == '__main__':
 	main()

@@ -10,13 +10,18 @@ const Create = ({ marketplace, nft, file}) => {
 
     //create states for what we want to keep track of in the app
     const[image, setImage] = useState('')  // image to represent nft metatdata
+    const[data, setData] = useState('') //state variable for the IoT data
     const[price, setPrice] = useState(null)
     const[name, setName] = useState('')
     const[description, setDescription] = useState('')
 
+    const collectFile = async(event) => {
+
+    }
+
     //upload function to IPFS
-    //takes the upload in the input field and stores it in IPFS -> returning the CID
-    const uploadToIPFS = async(event) => {
+    //takes the image upload in the input field and stores it in IPFS -> returning the CID
+    const uploadImageToIPFS = async(event) => {
         event.preventDefault()
         const file = event.target.files[0]
         //check it is a valid file being uploaded
@@ -29,19 +34,37 @@ const Create = ({ marketplace, nft, file}) => {
                 console.log("Error uploading image data to IPFS: ", error)
             }
         }
-        console.log("Uploaded to IPFS!")
+        console.log("Uploaded Image to IPFS!")
     }
 
+    //upload function to IPFS
+    //takes the data rendered from the backend and stores in IPFS
+    //Improvement will be to integrate both of these upload to IPFS functions - kept them seperate due to time constraints
+    const uploadDataToIPFS = async(event) => {
+        event.preventDefault()
+        const file = file
+        //check it is a valid file being uploaded
+        if (typeof file !== 'undefined') {
+            try {   //try/catch for potential errors with the upload 
+                const result = await client.add(file)
+                console.log(result)
+                setData('https://ipfs.infura.io/ipfs/'+result.path)
+            } catch(error) {
+                console.log("Error uploading image data to IPFS: ", error)
+            }
+        }
+        console.log("Uploaded IoT Data to IPFS!")
+    }
     //create nft function. Triggered when user clicks submit on create form.
     //takes all the data from the Create function (name, image, price etc. )
     //first interacts with IPFS to upload all of the data in the submit form
     //second interacts with the blockchain to mint the NFT
     const createNFT = async() => {
         //verify all data fields have been filled on the create form
-        if (!image || !price || !name|| !description) return 
+        if (!image || !data || !price || !name|| !description) return 
 
         try {  //try/catch to verify upload is successful
-            const result = await client.add(JSON.stringify({image, name, description}))
+            const result = await client.add(JSON.stringify({image, data, name, description}))
             mintThenList(result)
         } catch(error) {
             console.log("error with ipfs upload URI ", error)
@@ -76,8 +99,13 @@ const Create = ({ marketplace, nft, file}) => {
                 <main role="main" className="col-lg-12 mx-auto" style={{maxWidth: '1000px'}}>
                     <div className="content mx-auto">
                         <Row className="g-4">
-                            {/* form type takes a file as upload, calls the UploadToIPFS function */}
-                            <Form.Control type="file" name="file" onChange={uploadToIPFS}/>
+                            {/* form type takes a file as upload, calls the UploadImageToIPFS function */}
+                            <Form.Control type="file" name="file" onChange={uploadImageToIPFS}/>
+                            {/* form type takes a file as upload, calls the UploadDataToIPFS function */}
+                            <Form.Control as="select" aria-label="Default select example" onChange={uploadDataToIPFS}>
+                                <option>Select your imported data file</option>
+                                <option value={"1."}>{file}</option>
+                            </Form.Control>
                             {/* nft name field, once triggered calls the setName function passing the name on the input form */}
                             <Form.Control onChange={(e) => setName(e.target.value)} size="lg" type="text" placeholder="Name"/>
                             {/* nft description field */}
