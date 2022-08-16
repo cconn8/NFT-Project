@@ -1,19 +1,32 @@
-### IoT / NFT application for Collecting and Creating NFTs from IoT Data
+# IoT / NFT application for Collecting and Creating NFTs from IoT Data
 
 Data is collected using an ADXL345 accelerometer interfacing a RaspberryPi 4 and transmitted over a socket session using the socketio library for Python on the client side and Javascript on the server side. The server receives the data and uploads it to the Inter Planetary File System, from which a content ID (hash of the data) is returned, triggering a call to the NFT Smart Contract. The NFT smart contract subsequently mints (creates) an NFT record of the data, rendering the reference image (NFT) to the frontend GUI. The NFT application comprises a WebApp using React on the frontend and Node.js on the backend. The goal of this project was to implement a full stack IoT system with the added features of web3 integration to prove Data Ownership and Traceability.
 
-Credits: 
-DAPP University Starter kit developed by Ethan-Crypto leveraged as a starting point for the project on NFT side. The code can be found here: https://github.com/dappuniversity/starter_kit_2/tree/c7557aa2518c4338f1562abe3afd03ae244d42ef
+### Credits: 
+DAPP University Open Source Blockchain Starter kit developed by Ethan-Crypto leveraged as a starting point for the project on NFT side. The code can be found here: https://github.com/dappuniversity/starter_kit_2/tree/c7557aa2518c4338f1562abe3afd03ae244d42ef
 Thanks @Ethan-Crypto
 
+### Points to note: 
+* Initial development can be seen on the Master Branch, however moved the project to main for further development after deciding to leverage the starter kit
+* Source Code for the IoT component (RPi and ADXL345) can be found in the /src/backend/iotcomponent/* directory 
 
-# Dependencies
+
+
+## Libraries, Modules & Dependencies
+* Hardhat local testnet
 * react-router-dom@6 (for routing between pages in the app)
 * ipfs-http-client@56.0.1
-* npm i @openzeppelin/contracts@4.5.0 library
+* @openzeppelin/contracts@4.5.0 library
+* ethers library
+* react.js
+* node.js
+* express
+* cors 
+* nodemon
+* socket.io
 
 
-# Project Log
+## Project Log
 
 18/July
 
