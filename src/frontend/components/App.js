@@ -20,6 +20,8 @@ import MarketplaceAddress from '../contractsData/Marketplace-address.json'
 import NFTAbi from '../contractsData/NFT.json'
 import NFTAddress from '../contractsData/NFT-address.json'
 import { Spinner } from 'react-bootstrap';
+import MyListedItems from './MyListedItems';
+import MyPurchases from './MyPurchases';
 
 const socket = io.connect('http://localhost:3001')  //connect to our backend server running on 3001
 
@@ -133,9 +135,13 @@ function App() {
             <Create marketplace={marketplace} nft={nft} file={file} filename={filename}/> 
           } />
 
-          <Route path="/my-listed-items" />
-          <Route path="/my-purchases"/>
+          <Route path="/my-listed-items" element={
+            <MyListedItems marketplace={marketplace} nft={nft} account={account} /> }/>
+          
+          <Route path="/my-purchases" element={
+            <MyPurchases marketplace={marketplace} nft={nft} account={account} /> } />
         </Routes>
+
         )
       }
       </div>

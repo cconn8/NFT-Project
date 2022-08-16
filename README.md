@@ -3,8 +3,12 @@
 Data is collected using an ADXL345 accelerometer interfacing a RaspberryPi 4 and transmitted over a socket session using the socketio library for Python on the client side and Javascript on the server side. The server receives the data and uploads it to the Inter Planetary File System, from which a content ID (hash of the data) is returned, triggering a call to the NFT Smart Contract. The NFT smart contract subsequently mints (creates) an NFT record of the data, rendering the reference image (NFT) to the frontend GUI. The NFT application comprises a WebApp using React on the frontend and Node.js on the backend. The goal of this project was to implement a full stack IoT system with the added features of web3 integration to prove Data Ownership and Traceability.
 
 ### Credits: 
-DAPP University Open Source Blockchain Starter kit developed by Ethan-Crypto leveraged as a starting point for the project on NFT side. The code can be found here: https://github.com/dappuniversity/starter_kit_2/tree/c7557aa2518c4338f1562abe3afd03ae244d42ef
-Thanks @Ethan-Crypto
+* DAPP University Open Source Blockchain Starter kit developed by Ethan-Crypto leveraged as a starting point for the project on NFT side. The code can be found here: https://github.com/dappuniversity/starter_kit_2/tree/c7557aa2518c4338f1562abe3afd03ae244d42ef
+
+* Smart contract guidelines and templates used from Openzeppelin.com: https://docs.openzeppelin.com/contracts/3.x/erc721
+
+* DAPP university bootcamp for blockchain development was excellent for learning the ins and outs of blockchain/NFT development. Tutorials and Bootcamps can be found here: https://www.dappuniversity.com/bootcamp
+
 
 ### Points to note: 
 * Initial development can be seen on the Master Branch, however moved the project to main for further development after deciding to leverage the starter kit
@@ -25,6 +29,60 @@ Thanks @Ethan-Crypto
 * nodemon
 * socket.io
 
+
+## Testing
+
+#### Smart Contracts Testing
+* A key consideration in the development of this project was the integrtiy and stability of the smart contracts. Smart contract live on the blockchain. This means that once deployed, they cannot be changed. As a result, extensive testing of transaction scenarios was carried out to ensure the rigidity of the contracts. These are described in /test/NFTMarketplace.test.js.
+
+
+- Tests
+
+Harhat framework allows for writing tests for contracts during development. The script was written using the Waffle testing framework.
+The framework allows us to test scenarios using 3 key declarations; Should, Expect, Assert.
+A beforeEach hook ensures the neccessary data is gathered prior to running tests!
+
+
+1. NFT/Marketplace deployment
+Verify that post deployment, the NFT contract will successfully track the 'Name' and 'Symbol' of an NFT collection and the Marketplace contract will successfully track the pre-defined 'Fee Account' and 'Fee Percentage'. 
+The test "pass" criteria is defined using an 'expect' statement from the chai library.
+- Pass: 
+	* The deployed NFT name should equal ("IoT-NFT Dapp") - custom name set for the NFT collection
+	* The deployed NFT symbol should equal ("IOTD")  - custom symbol set for the NFT collection
+	* The marketplace fee account should equal the deployers address 
+	* The marketplace fee percentage should equal the fee percent passed in code (1)
+
+
+2. NFT (Create) Mint function
+
+To test that the mint function works correctly (ie. that an NFT record will be successfully created and stored from the data). A user account and NFT metadata URI (could be for an image/iot data or other) is passed and a test NFT created. 
+- Pass:
+	* The number of tokens should now be 1 (ie. After 1 token is minted, there is now 1 token in circulation)
+	* The number of NFT tokens at the buyers address should now be 1
+	* The NFT token URI is equal to the URI passed to the test 
+	* A second buyer should increase the tokenCount() to 2
+
+
+3. Marketplace Create Items function 
+Verify that a user can create nft from their uploaded data using the mint function , followed by listing the minted NFT on the marketplace for buyers to purchase. Listing an NFT requires the seller to transfer ownership of the NFT to the marketplace. Therefore the function should be robust against errors in transferring the NFT. For the seller and also subsequently for incorrect (buyers). To test this, addr1 mints an nft and offers their nft at a price of 1 ether by calling the makeItem function. The function should Successfully track a newly created item by making an NFT with makeItem, Emit an offered event once the NFT has been created, and successfully transfer ownership of the NFT from seller to marketplace.
+- Pass:
+	* An offered event should be emitted 
+	* NFT owner attribute should equal marketplace address
+	* The itemCount on the marketplace should equal (1)
+	* All mappings of the NFT attributes on the marketplace (id, price, address etc.) should equal the expected NFT attributes to indicate a successful mapping fof data
+
+- Fail:
+	* Additional fail test here, checks that the price is not set at 0 - ie. no free transfers are possible. This is tested by passing a price of zero to the makeItem function and expecting an error message.
+
+
+4. NFT Purchase function
+To test the purchase capability, the test script connects a user account to mint an nft record. It then approves spend of NFT on the marketplace (ie. sends to marketplace), followed by calling the makeItem function to list the NFT on the marketplace. It expects a user account to connect and purchase an NFT, the marketplace contract should emit a bought event with arguments in the nft mappings struct updated appropriately.
+
+- Pass:
+	* Function will check the log following bough event to confirm mappings have been updated
+		ie. same itemId, nft address, price, seller and buyer adresses match up
+	* The sellers final eth balance is equal to the price of the total price of NFT + the sellers initial eth balance
+	
 
 ## Project Log
 
@@ -150,3 +208,9 @@ NEXT: Need to pass the file to the upload field in the create form
 
     * Successfully rendering the fileobject to dropdown on Create.js page
     * Issue calling the upload to IPFS function on the object
+
+
+17/08/2022
+* Completed frontend application by adding two pages for lised items and purchased items
+* Carried out testing on IoT component and Frontend application components. 
+* Errors in Creating and rendering the NFT from the data - to be reviewed and tested again tomorrow
